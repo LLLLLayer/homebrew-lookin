@@ -1,26 +1,74 @@
 # Homebrew Tap for ivista-lookin
 
+This repository is the official Homebrew tap for `ivista-lookin`.
+
 `ivista-lookin` is a standalone command-line interface for inspecting iOS apps that integrate LookinServer. It does not require the macOS Lookin.app to be installed, but the target iOS app must already include a compatible LookinServer integration.
+
+## What Is This Repository?
+
+A Homebrew tap is a Git repository that stores Homebrew formulae. The repository name follows Homebrew convention:
+
+```text
+homebrew-ivista-lookin
+```
+
+That lets users add this tap with the short command:
+
+```bash
+brew tap LLLLLayer/ivista-lookin
+```
+
+Homebrew expands that to:
+
+```text
+https://github.com/LLLLLayer/homebrew-ivista-lookin
+```
+
+The install rule lives in:
+
+```text
+Formula/ivista-lookin.rb
+```
 
 ## Install
 
+Recommended:
+
+```bash
+brew tap LLLLLayer/ivista-lookin
+brew install ivista-lookin
+```
+
+One-line install also works:
+
 ```bash
 brew install LLLLLayer/ivista-lookin/ivista-lookin
+```
+
+Verify:
+
+```bash
 ivista-lookin --version
 ivista-lookin doctor
 ```
 
-Upgrade:
+## Upgrade
 
 ```bash
 brew update
 brew upgrade ivista-lookin
 ```
 
-Uninstall:
+## Uninstall
 
 ```bash
 brew uninstall ivista-lookin
+```
+
+Remove the tap if you no longer need it:
+
+```bash
+brew untap LLLLLayer/ivista-lookin
 ```
 
 ## Requirements
@@ -48,7 +96,13 @@ ivista-lookin inspect --bundle-id com.example.demo --oid 123 --json
 ivista-lookin attrs --bundle-id com.example.demo --oid 123
 ```
 
-When multiple apps or devices match, add selectors:
+When multiple apps or devices match, add selectors. Start by listing reachable apps:
+
+```bash
+ivista-lookin apps --json
+```
+
+Then narrow the target:
 
 ```bash
 ivista-lookin apps --transport usb
@@ -130,6 +184,14 @@ ivista-lookin set --bundle-id com.example.demo --oid 123 --attr l_f_f --value "0
 
 `set` supports built-in settable attributes and custom attributes that expose a `customSetterID`.
 
+Supported value forms include booleans, numbers, strings, geometry values, edge insets, and colors:
+
+```bash
+ivista-lookin set --bundle-id com.example.demo --oid 123 --attr hidden --value true
+ivista-lookin set --bundle-id com.example.demo --oid 123 --attr l_f_f --value "0,0,120,44"
+ivista-lookin set --bundle-id com.example.demo --oid 123 --attr backgroundColor --value "#FF0000"
+```
+
 ## JSON and Scripting
 
 Use `--json` for machine-readable output. Warnings and errors are written to stderr; JSON is written to stdout.
@@ -137,6 +199,21 @@ Use `--json` for machine-readable output. Warnings and errors are written to std
 ```bash
 ivista-lookin apps --json | jq .
 ivista-lookin tree --bundle-id com.example.demo --depth 1 --json > tree.json
+```
+
+## Installed Files
+
+Homebrew installs `ivista-lookin` as a command-line executable and keeps its bundled frameworks under the formula's `libexec` directory. You normally only need:
+
+```bash
+ivista-lookin --help
+```
+
+To inspect the installed formula:
+
+```bash
+brew info ivista-lookin
+brew list ivista-lookin
 ```
 
 ## Lookin.app Conflict
@@ -174,6 +251,20 @@ Then check:
 4. macOS Lookin.app is not occupying the current LookinServer session.
 
 Server version errors mean the target app's LookinServer protocol is outside the CLI-supported range. Upgrade the target app's LookinServer integration, or use a CLI version compatible with that app.
+
+## Maintainers
+
+Release updates are made by editing `Formula/ivista-lookin.rb`:
+
+1. Update `url` to the new GitHub release asset.
+2. Update `sha256` from `shasum -a 256`.
+3. Run the formula syntax check.
+4. Commit and push this tap repository.
+
+```bash
+ruby -c Formula/ivista-lookin.rb
+brew audit --strict --online ivista-lookin
+```
 
 ## Project Links
 
