@@ -52,11 +52,15 @@ ivista-lookin --version
 ivista-lookin doctor
 ```
 
-JSON field reference:
+## Documentation
 
-```text
-https://github.com/LLLLLayer/ivista-lookin/blob/ivista/cli/Docs/LookinCLI字段说明.md
-```
+This tap README is the user-facing install and quick-start page. Source-bound documents live in the main repository so CLI behavior and field contracts can be updated together with code.
+
+- Recommended workflow: see [Quick Start](#quick-start) and [Common Workflows](#common-workflows) below.
+- Full usage manual: https://github.com/LLLLLayer/ivista-lookin/blob/ivista/cli/Docs/LookinCLI使用手册.md
+- JSON field reference: https://github.com/LLLLLayer/ivista-lookin/blob/ivista/cli/Docs/LookinCLI字段说明.md
+- Release checklist and signing notes: https://github.com/LLLLLayer/ivista-lookin/tree/ivista/cli/Docs
+- CLI source and releases: https://github.com/LLLLLayer/ivista-lookin
 
 ## Upgrade
 
