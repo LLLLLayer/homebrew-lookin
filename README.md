@@ -52,6 +52,12 @@ ivista-lookin --version
 ivista-lookin doctor
 ```
 
+JSON field reference:
+
+```text
+https://github.com/LLLLLayer/ivista-lookin/blob/ivista/cli/Docs/LookinCLI字段说明.md
+```
+
 ## Upgrade
 
 ```bash
